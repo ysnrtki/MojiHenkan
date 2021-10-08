@@ -27,7 +27,7 @@ $(() => {
 			$("textarea[name='変換後']").val(result);
 		}
 	});
-	$("textarea[name='変換後']]").on("focus", function () {
+	$("textarea[name='変換後']").on("focus", function () {
 		this.select();
 	});
 });
