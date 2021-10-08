@@ -1,6 +1,6 @@
-﻿$(() => {
-	$("textarea[name='変換元'], select[name='変換方法']").on("blur change", function () {
-		const source = $("textarea[name='変換元']").val() || "";
+$(() => {
+	$("textarea[name='変換前'], select[name='変換方法']").on("blur change", function () {
+		const source = $("textarea[name='変換前']").val() || "";
 		const method = $("select[name='変換方法']").val();
 		if (!method) {
 			return;
