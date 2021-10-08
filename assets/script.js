@@ -1,34 +1,36 @@
 $(() => {
+	$("textarea[name='変換前'], select[name='変換方法']").toArray().forEach(field => $(field).val(localStorage.getItem($(field).attr("name"))));
 	$("textarea[name='変換前'], select[name='変換方法']").on("blur change", function () {
-		const source = $("textarea[name='変換前']").val() || "";
+		$("textarea[name='変換前'], select[name='変換方法']").toArray().forEach(field => localStorage.setItem($(field).attr("name"), $(field).val()));
+		const before = $("textarea[name='変換前']").val() || "";
 		const method = $("select[name='変換方法']").val();
 		if (!method) {
 			return;
 		}
 		if (method === "大文字") {
-			$("textarea[name='変換後']").val(source.toUpperCase());
+			$("textarea[name='変換後']").val(before.toUpperCase());
 		}
 		if (method === "小文字") {
-			$("textarea[name='変換後']").val(source.toLowerCase());
+			$("textarea[name='変換後']").val(before.toLowerCase());
 		}
 		if (method === "コンパクト") {
-			let result = source;
-			result = result.replace(/    /g, "\t");
-			result = result.replace(/ +/g, " ");
-			result = result.replace(/[ \t]+$/g, "");
-			const faweaf = result.split("");
-			result = "";
-			for (let i = 0; i < faweaf.length; i++) {
-				if (i >= 2 && /^\r?\n$/.test(faweaf[i]) && /^\r?\n$/.test(faweaf[i - 1]) && /^\r?\n$/.test(faweaf[i - 2])) {
+			let after = before;
+			after = after.replace(/    /g, "\t");
+			after = after.replace(/ +/g, " ");
+			after = after.replace(/[ \t]+$/g, "");
+			const splitted = after.split("");
+			after = "";
+			for (let i = 0; i < splitted.length; i++) {
+				if (i >= 2 && /^\r?\n$/.test(splitted[i]) && /^\r?\n$/.test(splitted[i - 1]) && /^\r?\n$/.test(splitted[i - 2])) {
 					continue;
 				}
-				result += faweaf[i];
+				after += splitted[i];
 			}
-			$("textarea[name='変換後']").val(result);
+			$("textarea[name='変換後']").val(after);
 		}
-	});
+	}).filter(":first").blur();
 	$("textarea[name='変換後']").on("focus", function () {
-		this.setSelectionRange(0, ($(this).val() || "").length);
+		this.select();
 	});
 });
 
