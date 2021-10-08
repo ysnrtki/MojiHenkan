@@ -28,7 +28,7 @@ $(() => {
 		}
 	});
 	$("textarea[name='変換後']").on("focus", function () {
-		this.select();
+		this.setSelectionRange(0, ($(this).val() || "").length);
 	});
 });
 
