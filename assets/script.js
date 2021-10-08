@@ -27,6 +27,9 @@ $(() => {
 			$("textarea[name='変換後']").val(result);
 		}
 	});
+	$("textarea[name='変換後']]").on("focus", function () {
+		this.select();
+	});
 });
 
 const trimEx = value => {
