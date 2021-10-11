@@ -29,7 +29,7 @@ $(() => {
 			$("textarea[name='変換後']").val(after);
 		}
 	}).filter(":first").blur();
-	$("textarea[name='変換後']").on("focus", function () {
+	$("textarea[name='変換前'], textarea[name='変換後']").on("focus", function () {
 		this.select();
 	});
 });
