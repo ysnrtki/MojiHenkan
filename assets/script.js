@@ -14,8 +14,8 @@ $(() => {
 			$("textarea[name='変換後']").val(before.toLowerCase());
 		}
 		if (method === "コンパクト") {
-			let after = before;
-			after = after.replace(/    /g, "\t");
+			let after = trimEx(before);
+			after = after.replace(/	/g, "\t");
 			after = after.replace(/ +/g, " ");
 			after = after.replace(/[ \t]+$/g, "");
 			const splitted = after.split("");
@@ -25,6 +25,22 @@ $(() => {
 					continue;
 				}
 				after += splitted[i];
+			}
+			{
+				after = after.replace(/[！-～]/g, str => String.fromCharCode(str.charCodeAt(0) - 0xFEE0));
+				const map = {
+					"’": "'",
+					"－": "-",
+					"‐": "-",
+					"―": "-",
+					"　": " ",
+					"‘": "`",
+					"〜": "~",
+					"～": "~",
+					"”": "\"",
+					"￥": "\\",
+				};
+				Object.keys(map).forEach(key => after = after.replace(key, map[key]));
 			}
 			$("textarea[name='変換後']").val(after);
 		}
