@@ -15,7 +15,7 @@ $(() => {
 		}
 		if (method === "コンパクト") {
 			let after = trimEx(before);
-			after = after.replace(/	/g, "\t");
+			after = after.replace(/    /g, "\t");
 			after = after.replace(/ +/g, " ");
 			after = after.replace(/[ \t]+$/g, "");
 			const splitted = after.split("");
