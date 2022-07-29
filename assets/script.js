@@ -7,7 +7,6 @@ $(() => {
 		if (!method) {
 			return;
 		}
-
 		const 大文字 = () => $("textarea[name='変換後']").val(before.toUpperCase());
 		const 小文字 = () => $("textarea[name='変換後']").val(before.toLowerCase());
 		const コンパクト = () => {
@@ -41,7 +40,6 @@ $(() => {
 			}
 			$("textarea[name='変換後']").val(after);
 		};
-
 		if (method === "大文字") {
 			大文字();
 		}
