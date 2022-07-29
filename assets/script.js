@@ -7,13 +7,10 @@ $(() => {
 		if (!method) {
 			return;
 		}
-		if (method === "大文字") {
-			$("textarea[name='変換後']").val(before.toUpperCase());
-		}
-		if (method === "小文字") {
-			$("textarea[name='変換後']").val(before.toLowerCase());
-		}
-		if (method === "コンパクト") {
+
+		const 大文字 = () => $("textarea[name='変換後']").val(before.toUpperCase());
+		const 小文字 = () => $("textarea[name='変換後']").val(before.toLowerCase());
+		const コンパクト = () => {
 			let after = trimEx(before);
 			after = after.replace(/    /g, "\t");
 			after = after.replace(/ +/g, " ");
@@ -43,6 +40,24 @@ $(() => {
 				Object.keys(map).forEach(key => after = after.replace(key, map[key]));
 			}
 			$("textarea[name='変換後']").val(after);
+		};
+
+		if (method === "大文字") {
+			大文字();
+		}
+		if (method === "小文字") {
+			小文字();
+		}
+		if (method === "コンパクト") {
+			コンパクト();
+		}
+		if (method === "大文字 + コンパクト") {
+			大文字();
+			コンパクト();
+		}
+		if (method === "小文字 + コンパクト") {
+			小文字();
+			コンパクト();
 		}
 	}).filter(":first").blur();
 	$("textarea[name='変換前'], textarea[name='変換後']").on("focus", function () {
