@@ -40,6 +40,11 @@ $(() => {
 			result = result.replace(/\n{3,}/g, "\n\n");
 			return result;
 		};
+		const 半角スペースで分割して並べ替え = str => {
+			const splitted = str.split(" ");
+			splitted.sort((a, b) => a.localeCompare(b));
+			return splitted.join(" ");
+		};
 		if (method === "大文字") {
 			$("textarea[name='変換後']").val(大文字(before));
 		}
@@ -54,6 +59,9 @@ $(() => {
 		}
 		if (method === "小文字 + コンパクト") {
 			$("textarea[name='変換後']").val(コンパクト(小文字(before)));
+		}
+		if (method === "半角スペースで分割して並び替え") {
+			$("textarea[name='変換後']").val(半角スペースで分割して並び替え(before));
 		}
 	}).filter(":first").blur();
 	$("textarea[name='変換前'], textarea[name='変換後']").on("focus", function () {
