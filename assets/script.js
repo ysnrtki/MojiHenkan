@@ -34,7 +34,7 @@ $(() => {
                     "￥": "\\",
                 };
                 Object.keys(map).forEach(key => line = line.replace(new RegExp(key, "g"), map[key]));
-                line = trimEx(line.replace(/\s+/g, " ").replace(/ +/g, " "));
+                line = trimEx(line.replace(/[ \f\n\r\t]+/g, " ").replace(/ +/g, " "));
                 return `${indent}${line}`;
             }).join("\n");
             result = result.replace(/\n{3,}/g, "\n\n");
