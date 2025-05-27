@@ -2,11 +2,15 @@ $(() => {
     $("textarea[name='変換前']").val(localStorage.getItem("変換前"));
     try {
         $("select[name='変換方法']").val(JSON.parse(localStorage.getItem("変換方法") || "[]"));
-    } catch() {
+    } catch(e) {
     }
+    
     $("textarea[name='変換前'], select[name='変換方法']").on("blur change", function () {
+        $("#変換方法テキスト").text($(this).val().join(", "));
+        
         localStorage.setItem("変換前", $("textarea[name='変換前']").val());
         localStorage.setItem("変換方法", JSON.stringify($("select[name='変換方法']").val()));
+
         const before = $("textarea[name='変換前']").val() || "";
         const method = $("select[name='変換方法']").val();
         if (!method) {
