@@ -9,11 +9,19 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
 <script src="./assets/vendors/jquery/jquery-3.3.1.min.js?v=2022110802"></script>
 <script src="./assets/vendors/popper/popper.min.js?v=2022110802"></script>
+<script src="./assets/vendors/moji/moji.standalone.min.js?v=2022110802"></script>
 <link href="./assets/vendors/bootstrap/css/bootstrap.min.css?v=2022110802" rel="stylesheet">
 <script src="./assets/vendors/bootstrap/js/bootstrap.min.js?v=2022110802"></script>
 <link href="./assets/style.css?v=2022110802" rel="stylesheet">
 <script src="./assets/script.js?v=2022110802"></script>
 </head>
+<script>
+	$(() => {
+		$("select[name='変換方法']").change(function () {
+			$("#変換方法テキスト").text($(this).val().join(", "));
+		});
+	});
+</script>
 <div class="container-fluid m-0 px-4 py-5" style="width: 100%;">
 	<div class="text-center" style="font-size: 1.5rem;">文字変換</div>
 	<form class="mt-5">
@@ -25,15 +33,20 @@
 		</div>
 		<div class="form-group row mt-2 mb-0">
 			<div class="col-12">
-				<select name="変換方法" class="custom-select" style="font-size: 0.8rem;">
-					<option value="">変換方法</option>
+				<select name="変換方法" class="custom-select" style="font-size: 0.8rem;" multiple="multiple">
 					<option value="大文字">大文字</option>
 					<option value="小文字">小文字</option>
 					<option value="コンパクト">コンパクト</option>
-					<option value="大文字 + コンパクト">大文字 + コンパクト</option>
-					<option value="小文字 + コンパクト">小文字 + コンパクト</option>
 					<option value="半角スペースで分割してソート">半角スペースで分割してソート</option>
+					<option value="半角数値のみ">半角数値のみ</option>
+					<option value="半角">半角</option>
+					<option value="全角">全角</option>
 				</select>
+			</div>
+		</div>
+		<div class="form-group row mt-2 mb-0" style="font-size: 0.8rem;">
+			<div class="col-12">
+				<span id="変換方法テキスト">&nbsp;</span>
 			</div>
 		</div>
 		<div class="form-group row mt-2 mb-0">

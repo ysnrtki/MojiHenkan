@@ -45,24 +45,31 @@ $(() => {
             splitted.sort((a, b) => a.localeCompare(b));
             return splitted.join(" ");
         };
-        if (method === "大文字") {
-            $("textarea[name='変換後']").val(大文字(before));
-        }
-        if (method === "小文字") {
-            $("textarea[name='変換後']").val(小文字(before));
-        }
-        if (method === "コンパクト") {
-            $("textarea[name='変換後']").val(コンパクト(before));
-        }
-        if (method === "大文字 + コンパクト") {
-            $("textarea[name='変換後']").val(コンパクト(大文字(before)));
-        }
-        if (method === "小文字 + コンパクト") {
-            $("textarea[name='変換後']").val(コンパクト(小文字(before)));
-        }
-        if (method === "半角スペースで分割してソート") {
-            $("textarea[name='変換後']").val(半角スペースで分割してソート(before));
-        }
+        let after = before;
+        ($("select[name='変換方法']").val() || []).forEach(method => {
+            if (method === "大文字") {
+                after = 大文字(after);
+            }
+            if (method === "小文字") {
+                after = 小文字(after);
+            }
+            if (method === "コンパクト") {
+                after = コンパクト(after);
+            }
+            if (method === "半角スペースで分割してソート") {
+                after = 半角スペースで分割してソート(after);
+            }
+            if (method === "半角数値のみ") {
+                after = after.replace(/[^0-9]/g, "");
+            }
+            if (method === "半角") {
+                after = new Moji(after).convert("ZE", "HE").toString();
+            }
+            if (method === "全角") {
+                after = new Moji(after).convert("HE", "ZE").toString();
+            }
+        });
+        $("textarea[name='変換後']").val(after);
     }).filter(":first").blur();
     $("textarea[name='変換前'], textarea[name='変換後']").on("focus", function () {
         this.select();
